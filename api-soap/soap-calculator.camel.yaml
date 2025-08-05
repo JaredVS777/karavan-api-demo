@@ -44,8 +44,8 @@
             id: to-93de
             uri: https
             parameters:
-              uri: https://www.dneonline.com/calculator.asmx
               bridgeEndpoint: true
+              httpUri: www.dneonline.com/calculator.asmx
         - log:
             id: log-5247
             message: ${body}

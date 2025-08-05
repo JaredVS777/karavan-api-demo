@@ -12,30 +12,36 @@
         bindingMode: "off"
 - route:
     id: route-4495
-    nodePrefixId: route-0ba
     from:
-      id: from-b541
+      id: from-a8c9
       uri: direct
       parameters:
         name: perros
       steps:
+        - removeHeaders:
+            id: removeHeaders-862a
+            pattern: CamelHttp*
         - setHeader:
-            id: header-ct
+            id: setHeader-372e
             name: Content-Type
             expression:
               constant:
-                id: constant-04e6
+                id: constant-076a
                 expression: application/json
         - to:
-            id: to-c4b2
-            disabled: false
+            id: to-05a0
             uri: https
             parameters:
               httpUri: dog.ceo/api/breeds/list/all
+              bridgeEndpoint: true
         - unmarshal:
             id: unmarshal-609e
             json:
-              id: json-c119
+              id: json-245e
         - log:
-            id: log-final
+            id: log-580b
             message: "🐶 Respuesta API externa: ${body}"
+        - marshal:
+            id: marshal-70e1
+            json:
+              id: json-91bc

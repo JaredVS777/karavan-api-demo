@@ -1,8 +1,7 @@
 - route:
     id: route-ec37
-    nodePrefixId: route-675
     from:
-      id: from-ee29
+      id: from-af2e
       uri: rest
       parameters:
         method: post
@@ -11,21 +10,21 @@
         produces: application/xml
       steps:
         - setHeader:
-            id: setHeader-0afe
+            id: setHeader-a266
             name: Content-Type
             expression:
               constant:
-                id: constant-bcbd
+                id: constant-cabe
                 expression: text/xml; charset=utf-8
         - setHeader:
-            id: setHeader-315e
+            id: setHeader-34a0
             name: SOAPAction
             expression:
               constant:
-                id: constant-efc8
+                id: constant-b82f
                 expression: "\"http://tempuri.org/Add\""
         - setBody:
-            id: setBody-3eda
+            id: setBody-4531
             expression:
               constant:
                 id: constant-d738
@@ -42,12 +41,13 @@
                      </soapenv:Body>
                   </soapenv:Envelope>
         - to:
-            id: to-337c
+            id: to-93de
             uri: https
             parameters:
-              httpUri: www.dneonline.com/calculator.asmx
+              uri: https://www.dneonline.com/calculator.asmx
+              bridgeEndpoint: true
         - log:
-            id: log-bd61
+            id: log-5247
             message: ${body}
         - setBody:
             id: setBody-4310

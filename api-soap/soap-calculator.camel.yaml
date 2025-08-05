@@ -1,0 +1,57 @@
+- route:
+    id: route-ec37
+    nodePrefixId: route-675
+    from:
+      id: from-ee29
+      uri: rest
+      parameters:
+        method: post
+        path: /calculator/add
+        consumes: application/xml
+        produces: application/xml
+      steps:
+        - setHeader:
+            id: setHeader-0afe
+            name: Content-Type
+            expression:
+              constant:
+                id: constant-bcbd
+                expression: text/xml; charset=utf-8
+        - setHeader:
+            id: setHeader-315e
+            name: SOAPAction
+            expression:
+              constant:
+                id: constant-efc8
+                expression: "\"http://tempuri.org/Add\""
+        - setBody:
+            id: setBody-3eda
+            expression:
+              constant:
+                id: constant-d738
+                expression: >-
+                  <soapenv:Envelope
+                  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:tem="http://tempuri.org/">
+                     <soapenv:Header/>
+                     <soapenv:Body>
+                        <tem:Add>
+                           <tem:intA>5</tem:intA>
+                           <tem:intB>7</tem:intB>
+                        </tem:Add>
+                     </soapenv:Body>
+                  </soapenv:Envelope>
+        - to:
+            id: to-337c
+            uri: https
+            parameters:
+              httpUri: www.dneonline.com/calculator.asmx
+        - log:
+            id: log-bd61
+            message: ${body}
+        - setBody:
+            id: setBody-4310
+            expression:
+              simple:
+                id: simple-937e
+                expression: ${body}

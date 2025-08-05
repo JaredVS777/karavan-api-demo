@@ -1,0 +1,41 @@
+- rest:
+    id: rest-9201
+    path: /perros
+    consumes: application/json
+    produces: application/json
+    get:
+      - id: get-18be
+        description: Obtiene datos de perros desde API externa
+        to: direct:perros
+        consumes: application/json
+        produces: application/json
+        bindingMode: "off"
+- route:
+    id: route-4495
+    nodePrefixId: route-0ba
+    from:
+      id: from-b541
+      uri: direct
+      parameters:
+        name: perros
+      steps:
+        - setHeader:
+            id: header-ct
+            name: Content-Type
+            expression:
+              constant:
+                id: constant-04e6
+                expression: application/json
+        - to:
+            id: to-c4b2
+            disabled: false
+            uri: https
+            parameters:
+              httpUri: dog.ceo/api/breeds/list/all
+        - unmarshal:
+            id: unmarshal-609e
+            json:
+              id: json-c119
+        - log:
+            id: log-final
+            message: "🐶 Respuesta API externa: ${body}"
